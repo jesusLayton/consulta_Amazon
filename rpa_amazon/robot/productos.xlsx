@@ -1,0 +1,19 @@
+The `productos.xlsx` file is an Excel file and cannot be represented in plain text. However, I can provide you with a description of how the data might be structured within the Excel file. 
+
+You can create the `productos.xlsx` file with the following columns:
+
+- Product Name
+- Price
+- Description
+- URL
+- Rating
+
+You can populate it with sample data like this:
+
+| Product Name | Price | Description       | URL                     | Rating |
+|--------------|-------|-------------------|-------------------------|--------|
+| Product 1    | $10   | Description 1     | http://example.com/1    | 4.5    |
+| Product 2    | $20   | Description 2     | http://example.com/2    | 4.0    |
+| Product 3    | $30   | Description 3     | http://example.com/3    | 4.8    |
+
+To create the `productos.xlsx` file, you can use Excel or any other spreadsheet software to set up the columns and add sample data as shown above.

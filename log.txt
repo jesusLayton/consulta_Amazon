@@ -1,0 +1,1049 @@
+Archivo no encontrado: productos.txt
+Archivo no encontrado: productos.txt
+Archivo no encontrado: productos.txt
+Archivo no encontrado: productos.txt
+Archivo no encontrado: productos.txt
+Error al procesar producto 1: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 2: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 3: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 4: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 5: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 6: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 7: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 8: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 9: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 10: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 11: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 12: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 13: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 14: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 15: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 16: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 17: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 18: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 19: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 20: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 1: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 2: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 3: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 4: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 5: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 6: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 7: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 8: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 9: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 10: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 11: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 12: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 13: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 14: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 15: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+
+Error al procesar producto 16: Message: no such element: Unable to locate element: {"method":"css selector","selector":"h2 a span"}
+  (Session info: chrome=142.0.7444.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0xde4093
+	0xde40d4
+	0xbee71d
+	0xc3a03d
+	0xc3a41b
+	0xc2f8c1
+	0xc5c954
+	0xc2f7c4
+	0xc5cac4
+	0xc7ee17
+	0xc5c706
+	0xc2da30
+	0xc2ed54
+	0x1055744
+	0x105091a
+	0xe0c322
+	0xdfc458
+	0xe031dd
+	0xdec408
+	0xdec5cc
+	0xdd675a
+	0x7573fcc9
+	0x777982ae
+	0x7779827e
+

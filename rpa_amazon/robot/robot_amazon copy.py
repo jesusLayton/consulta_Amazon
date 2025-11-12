@@ -16,7 +16,7 @@ import argparse
 # Asegurar que Python encuentre el módulo tools
 sys.path.append(os.path.dirname(__file__))
 
-from tools import enviar_correo_resumen, read_products, log_message, convertir_a_cop
+from tools import read_products, log_message, convertir_a_cop
 from db import conectar_db
 
 
@@ -52,18 +52,12 @@ class AmazonRobot:
             options=options
         )
         
-        # Conectar a la base de datos SqLite en la raz del proyecto
-        db_path = os.path.join(os.path.dirname(self.current_dir), "productos_amazon.db")
+        # Conectar a la base de datos SQLite con ruta absoluta
+        db_path = os.path.join(self.current_dir, "productos_amazon.db")
         self.conn, self.cursor = conectar_db(db_path)
 
-        # Limpiar la base de datos antes de empecar
-        print("Limpiando base de datos anterior...")
-        self.cursor.execute("DELETE FROM productos")
-        self.conn.commit()
-        print("Base de datos limpiada")
-
-        # Leer productos desde productos.xlsx con ruta absoluta
-        productos_path = os.path.join(self.current_dir, "productos.xlsx")
+        # Leer productos desde productos.txt con ruta absoluta
+        productos_path = os.path.join(self.current_dir, "productos.txt")
         self.products = read_products(productos_path)
         print(f"Productos cargados: {len(self.products)}")
 
@@ -169,17 +163,10 @@ class AmazonRobot:
             
             # Extraer precio
             try:
-                # Extraer el precio completo como aparece en Amazon
-                price_element = product.find_element(By.CSS_SELECTOR, "span.a-price span.a-offscreen")
-                price = price_element.get_attribute("textContent").strip()
+                price_whole = product.find_element(By.CSS_SELECTOR, "span.a-price-whole").text
+                price = f"${price_whole}"
             except:
-                try:
-                    # Método alternativo
-                    price_whole = product.find_element(By.CSS_SELECTOR, "span.a-price-whole").text
-                    price_fraction = product.find_element(By.CSS_SELECTOR, "span.a-price-fraction").text
-                    price = f"${price_whole}{price_fraction}"
-                except:
-                    price = "$0"
+                price = "$0"
             
             # Extraer entrega
             try:
@@ -187,28 +174,21 @@ class AmazonRobot:
             except:
                 entrega = "Sin información"
 
-            precio_cop = convertir_a_cop(price)
-            
             data = {
                 "categoria": product_name,
                 "nombre": title,
                 "precio_usd": price,
-                "precio_cop": precio_cop,
+                "precio_cop": convertir_a_cop(price),
                 "entrega": entrega
             }
             product_info.append(data)
-            print(f"    [OK] {idx}: {title[:40]}... - {price} (COP: ${precio_cop:,.0f})")
+            print(f"    [OK] {idx}: {title[:40]}... - {price}")
 
         print(f"  Total extraídos: {len(product_info)}")
         return product_info
 
     def save_to_db(self, product_info):
         """Guarda los productos en la base de datos."""
-        print(f"  Guardando {len(product_info)} productos en la BD...")
-        
-        guardados = 0
-        errores = 0
-        
         for product in product_info:
             try:
                 self.cursor.execute("""
@@ -221,14 +201,10 @@ class AmazonRobot:
                     product['precio_cop'],
                     product['entrega']
                 ))
-                guardados += 1
             except Exception as e:
-                errores += 1
                 log_message(f"Error guardando producto: {e}")
-                print(f"    [ERROR] No se pudo guardar: {product['nombre'][:30]}...")
         
         self.conn.commit()
-        print(f"  ✓ Guardados: {guardados} | Errores: {errores}")
 
     def create_summary(self):
         """Genera un resumen de los productos más baratos por categoría."""
@@ -280,19 +256,9 @@ class AmazonRobot:
                 continue
 
         self.create_summary()
-
-        # Enviar correo con resumen
-        enviar_correo_resumen(
-            self.conn,
-            "jesuslayton92@gmail.com",  
-            "jesuslayton92@gmail.com",       
-            "eyvk sfry milk gsim"       
-        )
         print("\n" + "="*60)
         print("PROCESO COMPLETADO")
         print("="*60)
-
-    
 
     def close(self):
         """Cierra el navegador y la base de datos."""

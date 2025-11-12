@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Productos Amazon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .filtros {
+            background: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .filtros input, .filtros select {
+            padding: 8px;
+            margin: 5px;
+            width: 200px;
+        }
+        .filtros button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .filtros button:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Consulta de Productos Amazon</h1>
+    
+    <div class="filtros">
+        <form method="GET">
+            <label>Categoría:</label>
+            <input type="text" name="categoria" placeholder="Buscar categoría..." value="{{ categoria_filtro }}">
+            
+            <label>Precio Min (COP):</label>
+            <input type="number" name="precio_min" placeholder="Ej: 100000" value="{{ precio_min_filtro }}">
+            
+            <label>Precio Max (COP):</label>
+            <input type="number" name="precio_max" placeholder="Ej: 500000" value="{{ precio_max_filtro }}">
+            
+            <button type="submit">Buscar</button>
+            <button type="button" onclick="window.location.href='/'">Limpiar</button>
+        </form>
+    </div>
+    
+    <div class="total">Total de productos: {{ productos|length }}</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Categoría</th>
+                <th>Producto</th>
+                <th>Precio USD</th>
+                <th>Precio COP</th>
+                <th>Entrega</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.precio_usd }}</td>
+                <td>${{ "{:,.0f}".format(producto.precio_cop) }}</td>
+                <td>{{ producto.entrega }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if productos|length == 0 %}
+    <p style="text-align: center; color: #999; margin-top: 50px;">
+        No se encontraron productos con los filtros seleccionados.
+    </p>
+    {% endif %}
+</body>
+</html>

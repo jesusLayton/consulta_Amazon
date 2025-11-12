@@ -1,1 +1,47 @@
-.evn
+# Base de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos Excel generados
+resumen_productos.xlsx
+
+# Logs
+*.log
+log.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Selenium
+chromedriver
+geckodriver
+*.exe
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Configuración sensible
+config.py
+.env
+
+# Cache de Selenium
+.wdm/

@@ -1,12 +1,9 @@
 __pycache__
 *.pyc
 *.pyo
-*.db
-*.log
 .git
 .gitignore
 venv/
 env/
 *.xlsx
 log.txt
-productos_amazon.db

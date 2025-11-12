@@ -46,18 +46,12 @@ class AmazonRobot:
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--start-maximized")
-
-        #self.driver = webdriver.Chrome(
-         #   service=Service(ChromeDriverManager().install()), 
-          #  options=options
-    #)
         
-        # Usar ChromeDriver instalado en el sistema
-        chromedriver_path = "/usr/local/bin/chromedriver"
         self.driver = webdriver.Chrome(
-            service=Service(chromedriver_path), 
+            service=Service(ChromeDriverManager().install()), 
             options=options
         )
+        
         # Conectar a la base de datos SqLite en la raz del proyecto
         db_path = os.path.join(os.path.dirname(self.current_dir), "productos_amazon.db")
         self.conn, self.cursor = conectar_db(db_path)

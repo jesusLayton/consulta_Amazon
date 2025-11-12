@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  amazon-api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./robot:/app/robot
+      - ./api:/app/api
+      - ./web:/app/web
+      - ./robot/data:/app/robot/data
+    environment:
+      - DISPLAY=:99
+    command: uvicorn api.app:app --host 0.0.0.0 --port 8000
+    network_mode: bridge  # ← AGREGAR
+    dns:                  # ← AGREGAR
+      - 8.8.8.8
+      - 8.8.4.4
+
+  amazon-web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./robot:/app/robot
+      - ./api:/app/api
+      - ./web:/app/web
+      - ./robot/data:/app/robot/data
+    environment:
+      - DISPLAY=:99
+    command: python web/app.py
+    depends_on:
+      - amazon-api
+    network_mode: bridge  # ← AGREGAR
+    dns:                  # ← AGREGAR
+      - 8.8.8.8
+      - 8.8.4.4
+
+volumes:
+  db-data:

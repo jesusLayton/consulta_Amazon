@@ -52,5 +52,12 @@ def index():
                          precio_min_filtro=precio_min,
                          precio_max_filtro=precio_max)
 
+#desde visual
+
+#if __name__ == '__main__':
+    #app.run(debug=True, port=5000)
+
+# para docker
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)

@@ -39,10 +39,10 @@ def get_producto(id: int):
         "id": producto["id"],
         "categoria": producto["categoria"],
         "nombre": producto["nombre"],
-        "precio_usd": producto["precio_usd"],
+        "precio": producto["precio"],
         "precio_cop": producto["precio_cop"],
-        "entrega": producto["entrega"],
-        "fecha_registro": producto["fecha_registro"]
+        "entrega": producto["entrega"]
+
     }
 
 @app.get("/productos")
@@ -69,10 +69,10 @@ def get_productos(categoria: str = None, limite: int = 100):
                 "id": p["id"],
                 "categoria": p["categoria"],
                 "nombre": p["nombre"],
-                "precio_usd": p["precio_usd"],
+                "precio": p["precio"],
                 "precio_cop": p["precio_cop"],
-                "entrega": p["entrega"],
-                "fecha_registro": p["fecha_registro"]
+                "entrega": p["entrega"]
+
             }
             for p in productos
         ]

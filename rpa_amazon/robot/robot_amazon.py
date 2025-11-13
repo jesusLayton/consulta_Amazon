@@ -13,6 +13,12 @@ import sys
 import os
 import argparse
 
+
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
+
 # Asegurar que Python encuentre el módulo tools
 sys.path.append(os.path.dirname(__file__))
 
@@ -24,14 +30,23 @@ class AmazonRobot:
     def __init__(self, headless=False):
         """
         Inicializa el robot de Amazon.
-        
-        Args:
-            headless (bool): Si es True, el navegador se ejecuta sin ventana.
-                           Si es False, se puede ver el navegador.
         """
         # Obtener directorio actual
         self.current_dir = os.path.dirname(os.path.abspath(__file__))
         print(f"Directorio de trabajo: {self.current_dir}")
+
+        # Cargar configuración desde .env
+        self.amazon_url = os.getenv("AMAZON_URL", "https://www.amazon.com")
+        self.productos_a_extraer = int(os.getenv("PRODUCTOS_A_EXTRAER", "20"))
+        self.tiempo_espera_carga = int(os.getenv("TIEMPO_ESPERA_CARGA", "3"))
+        self.tiempo_espera_busqueda = int(os.getenv("TIEMPO_ESPERA_BUSQUEDA", "2"))
+        self.archivo_productos = os.getenv("ARCHIVO_PRODUCTOS", "productos.xlsx")
+        self.nombre_db = os.getenv("NOMBRE_BASE_DATOS", "productos_amazon.db")
+        
+        # Variables de correo desde .env
+        self.email_remitente = os.getenv("EMAIL_REMITENTE")
+        self.email_destinatario = os.getenv("EMAIL_DESTINATARIO")
+        self.email_password = os.getenv("EMAIL_PASSWORD")
         
         # Configurar el navegador
         options = Options()
@@ -66,8 +81,8 @@ class AmazonRobot:
                 service=Service(ChromeDriverManager().install()), 
                 options=options
             )
-        # Conectar a la base de datos SqLite en la raz del proyecto
-        db_path = os.path.join(os.path.dirname(self.current_dir), "productos_amazon.db")
+        # Conectar a la base de datos SqLite en la raíz del proyecto
+        db_path = os.path.join(os.path.dirname(self.current_dir), self.nombre_db)
         self.conn, self.cursor = conectar_db(db_path)
 
         # Limpiar la base de datos antes de empezar
@@ -79,31 +94,31 @@ class AmazonRobot:
         print("Base de datos limpiada y auto-incremento reseteado")
 
         # Leer productos desde productos.xlsx con ruta absoluta
-        productos_path = os.path.join(self.current_dir, "productos.xlsx")
+        productos_path = os.path.join(self.current_dir, self.archivo_productos)
         self.products = read_products(productos_path)
         print(f"Productos cargados: {len(self.products)}")
 
     def search_product1(self, product_name):
         """Abre Amazon y busca un producto."""
         print(f"  Navegando a Amazon...")
-        self.driver.get("https://www.amazon.com")
-        time.sleep(2)
+        self.driver.get(self.amazon_url)
+        time.sleep(self.tiempo_espera_busqueda)
         
         print(f"  Buscando: {product_name}")
         search_box = self.driver.find_element(By.ID, "twotabsearchtextbox")
         search_box.clear()
         search_box.send_keys(product_name)
         search_box.send_keys(Keys.RETURN)
-        time.sleep(3)
+        time.sleep(self.tiempo_espera_carga)
         
         # Seleccionar "Destacados" después de la búsqueda
         self.select_destacados()
 
     def search_product(self, product_name):
         """Abre Amazon y busca un producto."""
-        print(f"  Navegando a Amazon...")
-        self.driver.get("https://www.amazon.com")
-        time.sleep(5)
+        print(f" Navegando a Amazon")
+        self.driver.get(self.amazon_url)
+        time.sleep(self.tiempo_espera_carga)
         
         # Detectar y hacer clic en el botón "Continue shopping" si aparece
         try:
@@ -114,7 +129,7 @@ class AmazonRobot:
             )
             print(f"Detectado botón 'Continue shopping', haciendo clic...")
             continue_button.click()
-            time.sleep(3)
+            time.sleep(self.tiempo_espera_carga)
             print(f" Botón clickeado exitosamente")
         except:
             print(f" No se detectó botón de verificación, continuando...")
@@ -129,12 +144,12 @@ class AmazonRobot:
             search_box.clear()
             search_box.send_keys(product_name)
             search_box.send_keys(Keys.RETURN)
-            time.sleep(3)
+            time.sleep(self.tiempo_espera_carga)
             
             # Seleccionar "Destacados" después de la búsqueda
             self.select_destacados()
         except Exception as e:
-            print(f"  [ERROR] No se encontró la caja de búsqueda: {e}")
+            print(f" [ERROR] No se encontró la caja de búsqueda: {e}")
             # Guardar screenshot en caso de error
             error_screenshot = os.path.join(self.current_dir, "data", f"error_{product_name}.png")
             self.driver.save_screenshot(error_screenshot)
@@ -184,7 +199,7 @@ class AmazonRobot:
                         opcion = self.driver.find_element(By.XPATH, opcion_xpath)
                         opcion.click()
                         print(f"    [OK] 'Destacados' seleccionado correctamente")
-                        time.sleep(2)
+                        time.sleep(self.tiempo_espera_busqueda)
                         return True
                     except:
                         continue
@@ -201,17 +216,17 @@ class AmazonRobot:
             return False
 
     def extract_product_info(self, product_name):
-        """Extrae los primeros 20 productos (nombre, precio, entrega)."""
+        """Extrae los primeros N productos (nombre, precio, entrega)."""
         print(f"  Extrayendo información de productos...")
         
         # Esperar a que carguen los productos
-        time.sleep(3)
+        time.sleep(self.tiempo_espera_carga)
         
         # Selector para productos
         products = self.driver.find_elements(
             By.CSS_SELECTOR, 
             "div[data-component-type='s-search-result']"
-        )[:20]
+        )[:self.productos_a_extraer]
         
         print(f"  Productos encontrados: {len(products)}")
         
@@ -241,16 +256,28 @@ class AmazonRobot:
             
             # Extraer entrega
             try:
-                entrega = product.find_element(By.CSS_SELECTOR, "div.a-row.a-color-base").text
+                # Intento 1: Buscar por aria-label
+                entrega_element = product.find_element(By.CSS_SELECTOR, "span[aria-label*='Entrega']")
+                entrega = entrega_element.get_attribute("aria-label").strip()
             except:
-                entrega = "Sin información"
+                try:
+                    # Intento 2: Buscar por clase específica
+                    entrega_element = product.find_element(By.CSS_SELECTOR, "div.a-row.a-size-base.a-color-secondary")
+                    entrega = entrega_element.text.strip()
+                except:
+                    try:
+                        # Intento 3: Buscar cualquier div con texto de entrega
+                        entrega_element = product.find_element(By.XPATH, ".//div[contains(text(), 'Entrega')]")
+                        entrega = entrega_element.text.strip()
+                    except:
+                        entrega = "Sin información de entrega"
 
             precio_cop = convertir_a_cop(price)
             
             data = {
                 "categoria": product_name,
                 "nombre": title,
-                "precio_usd": price,
+                "precio": price,
                 "precio_cop": precio_cop,
                 "entrega": entrega
             }
@@ -270,12 +297,12 @@ class AmazonRobot:
         for product in product_info:
             try:
                 self.cursor.execute("""
-                    INSERT INTO productos (categoria, nombre, precio_usd, precio_cop, entrega)
+                    INSERT INTO productos (categoria, nombre, precio, precio_cop, entrega)
                     VALUES (?, ?, ?, ?, ?)
                 """, (
                     product['categoria'],
                     product['nombre'],
-                    product['precio_usd'],
+                    product['precio'],
                     product['precio_cop'],
                     product['entrega']
                 ))
@@ -286,14 +313,14 @@ class AmazonRobot:
                 print(f"    [ERROR] No se pudo guardar: {product['nombre'][:30]}...")
         
         self.conn.commit()
-        print(f"  ✓ Guardados: {guardados} | Errores: {errores}")
+        print(f"Guardados: {guardados} | Errores: {errores}")
 
     def create_summary(self):
         """Genera un resumen de los productos más baratos por categoría."""
         print("\nGenerando resumen de productos más baratos...")
         
         df = pd.read_sql_query("""
-            SELECT categoria, nombre, precio_usd, precio_cop, entrega
+            SELECT categoria, nombre, precio, precio_cop, entrega
             FROM productos
             WHERE precio_cop = (
                 SELECT MIN(precio_cop) 
@@ -309,7 +336,7 @@ class AmazonRobot:
         for _, row in df.iterrows():
             print(f"\nCategoria: {row['categoria']}")
             print(f"  Producto: {row['nombre']}")
-            print(f"  Precio USD: {row['precio_usd']}")
+            print(f"  Precio : {row['precio']}")
             print(f"  Precio COP: ${row['precio_cop']:,.2f}")
             print(f"  Entrega: {row['entrega']}")
         
@@ -330,7 +357,7 @@ class AmazonRobot:
                 self.search_product(product_name)
                 info = self.extract_product_info(product_name)
                 self.save_to_db(info)
-                time.sleep(2)
+                time.sleep(self.tiempo_espera_busqueda)
             except Exception as e:
                 error_msg = f"Error general con {product_name}: {e}"
                 log_message(error_msg)
@@ -339,12 +366,12 @@ class AmazonRobot:
 
         self.create_summary()
 
-        # Enviar correo con resumen
+        # Enviar correo con resumen usando variables de entorno
         enviar_correo_resumen(
             self.conn,
-            "jesuslayton92@gmail.com",  
-            "jesuslayton92@gmail.com",       
-            "eyvk sfry milk gsim"       
+            self.email_remitente,  
+            self.email_destinatario,       
+            self.email_password       
         )
         print("\n" + "="*60)
         print("PROCESO COMPLETADO")

@@ -13,15 +13,15 @@ def conectar_db(db_name="productos_amazon.db"):
         cursor = conn.cursor()
         
         # Crear tabla si no existe
+
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS productos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                categoria TEXT NOT NULL,
-                nombre TEXT NOT NULL,
-                precio_usd TEXT,
+                categoria TEXT,
+                nombre TEXT,
+                precio TEXT,
                 precio_cop REAL,
-                entrega TEXT,
-                fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                entrega TEXT
             )
         """)
         
@@ -63,12 +63,12 @@ def save_to_db(self, product_info):
     for product in product_info:
         try:
             self.cursor.execute("""
-                INSERT INTO productos (categoria, nombre, precio_usd, precio_cop, entrega)
+                INSERT INTO productos (categoria, nombre, precio, precio_cop, entrega)
                 VALUES (?, ?, ?, ?, ?)
             """, (
                 product['categoria'],
                 product['nombre'],
-                product['precio_usd'],
+                product['precio'],
                 product['precio_cop'],
                 product['entrega']
             ))

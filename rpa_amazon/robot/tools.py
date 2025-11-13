@@ -1,9 +1,19 @@
+from http import server
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import pandas as pd
+
+
+
+
+
+
+
+
+
 
 
 def read_products2(file_path):
@@ -114,11 +124,6 @@ def enviar_correo_resumen123(conn, destinatario, remitente, password):
     """
     Envía por correo un Excel con los productos más baratos por categoría.
     
-    Args:
-        conn: Conexión a la base de datos
-        destinatario (str): Email destino
-        remitente (str): Tu Gmail
-        password (str): Contraseña de aplicación de Gmail
     """
     try:
         # Consultar productos más bartos
@@ -177,12 +182,6 @@ def enviar_correo_resumen123(conn, destinatario, remitente, password):
     
 
 
-import pandas as pd
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 
 
 def read_products(file_path):
@@ -209,52 +208,70 @@ def log_message(message):
         f.write(f"{message}\n")
 
 
-def convertir_a_cop(precio_usd):
+def convertir_a_cop(precio_str):
     """
-    Convierte un precio en USD a COP.
-    Ejemplo: "$99.99" -> 449955.0
+    Detecta automáticamente si el precio es USD o COP según el prefijo.
+    - Si contiene "COP": Lo deja como está (ya es COP)
+    - Si contiene "US" o "$": Lo convierte de USD a COP usando TRM del .env
     """
+    import os
+    
     try:
-        precio_limpio = precio_usd.replace("$", "").replace(",", "").strip()
+        # Verificar si el precio contiene "COP" (ya está en pesos colombianos)
+        if "COP" in precio_str.upper():
+            # Limpiar y retornar como está, redondeado a 2 decimales
+            precio_limpio = precio_str.upper().replace("COP", "").replace("$", "").replace(",", "").strip()
+            return round(float(precio_limpio), 2)
+        
+        # Si no es COP, asumimos que es USD y convertimos
+        # Limpiar el precio (quitar US, $, espacios, comas)
+        precio_limpio = precio_str.replace("US", "").replace("$", "").replace(",", "").strip()
+        
+        if not precio_limpio or precio_limpio == "0":
+            return 0.0
+        
         precio_float = float(precio_limpio)
-        tasa_cambio = 4500
+        
+        # USAR TRM desde el archivo .env
+        tasa_cambio = float(os.getenv("TRM_COP", "4500"))
         precio_cop = precio_float * tasa_cambio
-        return precio_cop
-    except:
+        
+        # Redondear a 2 decimales
+        return round(precio_cop, 2)
+        
+    except Exception as e:
+        log_message(f"Error al convertir precio '{precio_str}': {e}")
         return 0.0
 
 
 def enviar_correo_resumen(conn, destinatario, remitente, password):
     """
     Envía por correo un Excel con los productos más baratos por categoría.
-    
-    Args:
-        conn: Conexión a la base de datos
-        destinatario (str): Email destino
-        remitente (str): Tu Gmail
-        password (str): Contraseña de aplicación de Gmail
     """
     try:
-        # Consultar productos más baratos usando precio_usd
+        # CONSULTA CORREGIDA: Usar precio_cop para encontrar el más barato
         df = pd.read_sql_query("""
             SELECT 
-                categoria as 'Categoría',
-                nombre as 'Producto',
-                precio_usd as 'Precio USD',
-                precio_cop as 'Precio COP'
+                p1.categoria as 'Categoría',
+                p1.nombre as 'Producto',
+                p1.precio as 'Precio',
+                p1.precio_cop as 'Precio COP'
             FROM productos p1
-            WHERE id = (
-                SELECT p2.id
-                FROM productos p2
-                WHERE p2.categoria = p1.categoria 
-                AND CAST(REPLACE(REPLACE(p2.precio_usd, '$', ''), ',', '') AS REAL) > 0
-                ORDER BY CAST(REPLACE(REPLACE(p2.precio_usd, '$', ''), ',', '') AS REAL) ASC
-                LIMIT 1
-            )
+            INNER JOIN (
+                SELECT categoria, MIN(precio_cop) as min_precio
+                FROM productos
+                WHERE precio_cop > 0
+                GROUP BY categoria
+            ) p2 ON p1.categoria = p2.categoria AND p1.precio_cop = p2.min_precio
         """, conn)
         
+        # Verificar si hay datos
+        if df.empty:
+            print("No hay datos para enviar")
+            return False
+        
         # Formatear precio COP
-        df['Precio COP'] = df['Precio COP'].apply(lambda x: f"${x:,.0f}")
+        df['Precio COP'] = df['Precio COP'].apply(lambda x: f"${x:,.2f}")
         
         # Crear Excel
         excel_file = "resumen_productos.xlsx"
@@ -266,32 +283,36 @@ def enviar_correo_resumen(conn, destinatario, remitente, password):
         msg['To'] = destinatario
         msg['Subject'] = 'Resumen de Productos Amazon'
         
-        # Cuerpo simple
-        cuerpo = f"Adjunto encontrarás el resumen de los {len(df)} productos más baratos encontrados en Amazon."
-        msg.attach(MIMEText(cuerpo, 'plain'))
+        # Cuerpo del correo
+        cuerpo = f"Adjunto encontraras el resumen de los {len(df)} productos mas baratos encontrados en Amazon."
+        msg.attach(MIMEText(cuerpo, 'plain', 'utf-8'))
         
         # Adjuntar Excel
         with open(excel_file, 'rb') as archivo:
             parte = MIMEBase('application', 'octet-stream')
             parte.set_payload(archivo.read())
             encoders.encode_base64(parte)
-            parte.add_header('Content-Disposition', f'attachment; filename={excel_file}')
+            parte.add_header(
+                'Content-Disposition', 
+                f'attachment; filename="{excel_file}"'
+            )
             msg.attach(parte)
         
         # Enviar
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(remitente, password)
-        server.send_message(msg)
+        texto = msg.as_string()
+        server.sendmail(remitente, destinatario, texto)
         server.quit()
         
-        print(f"\n✓ Correo enviado a {destinatario}")
+        print(f"\n Correo enviado a {destinatario}")
         return True
         
     except Exception as e:
-        print(f"\n✗ Error al enviar correo: {e}")
+        print(f"\n Error al enviar correo: {e}")
+        log_message(f"Error al enviar correo: {e}")
         return False
-
 
 
 

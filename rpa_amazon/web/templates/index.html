@@ -85,7 +85,7 @@
             <tr>
                 <th>Categoría</th>
                 <th>Producto</th>
-                <th>Precio USD</th>
+                <th>Precio </th>
                 <th>Precio COP</th>
                 <th>Entrega</th>
             </tr>
@@ -95,7 +95,7 @@
             <tr>
                 <td>{{ producto.categoria }}</td>
                 <td>{{ producto.nombre }}</td>
-                <td>{{ producto.precio_usd }}</td>
+                <td>{{ producto.precio }}</td>
                 <td>${{ "{:,.0f}".format(producto.precio_cop) }}</td>
                 <td>{{ producto.entrega }}</td>
             </tr>

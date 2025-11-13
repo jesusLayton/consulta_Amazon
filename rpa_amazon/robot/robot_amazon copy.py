@@ -13,10 +13,16 @@ import sys
 import os
 import argparse
 
+
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
+
 # Asegurar que Python encuentre el módulo tools
 sys.path.append(os.path.dirname(__file__))
 
-from tools import read_products, log_message, convertir_a_cop
+from tools import enviar_correo_resumen, read_products, log_message, convertir_a_cop
 from db import conectar_db
 
 
@@ -24,14 +30,18 @@ class AmazonRobot:
     def __init__(self, headless=False):
         """
         Inicializa el robot de Amazon.
-        
-        Args:
-            headless (bool): Si es True, el navegador se ejecuta sin ventana.
-                           Si es False, se puede ver el navegador.
         """
         # Obtener directorio actual
         self.current_dir = os.path.dirname(os.path.abspath(__file__))
         print(f"Directorio de trabajo: {self.current_dir}")
+
+         #Cargar configuración desde .env
+        self.amazon_url = os.getenv("AMAZON_URL", "https://www.amazon.com")
+        self.productos_a_extraer = int(os.getenv("PRODUCTOS_A_EXTRAER", "20"))
+        self.tiempo_espera_carga = int(os.getenv("TIEMPO_ESPERA_CARGA", "3"))
+        self.tiempo_espera_busqueda = int(os.getenv("TIEMPO_ESPERA_BUSQUEDA", "2"))
+        self.archivo_productos = os.getenv("ARCHIVO_PRODUCTOS", "productos.xlsx")
+        self.nombre_db = os.getenv("NOMBRE_BASE_DATOS", "productos_amazon.db")
         
         # Configurar el navegador
         options = Options()
@@ -46,22 +56,44 @@ class AmazonRobot:
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--start-maximized")
+
+        #self.driver = webdriver.Chrome(
+         #   service=Service(ChromeDriverManager().install()), 
+          #  options=options
+    #)
         
-        self.driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()), 
-            options=options
-        )
-        
-        # Conectar a la base de datos SQLite con ruta absoluta
-        db_path = os.path.join(self.current_dir, "productos_amazon.db")
+        # Detectar si estamos en Docker o local
+        if os.path.exists("/usr/local/bin/chromedriver"):
+            # Estamos en Docker, usar ChromeDriver pre-instalado
+            chromedriver_path = "/usr/local/bin/chromedriver"
+            self.driver = webdriver.Chrome(
+                service=Service(chromedriver_path), 
+                options=options
+            )
+        else:
+            # Estamos en local, descargar con ChromeDriverManager
+            self.driver = webdriver.Chrome(
+                service=Service(ChromeDriverManager().install()), 
+                options=options
+            )
+        # Conectar a la base de datos SqLite en la raz del proyecto
+        db_path = os.path.join(os.path.dirname(self.current_dir), "productos_amazon.db")
         self.conn, self.cursor = conectar_db(db_path)
 
-        # Leer productos desde productos.txt con ruta absoluta
-        productos_path = os.path.join(self.current_dir, "productos.txt")
+        # Limpiar la base de datos antes de empezar
+        print("Limpiando base de datos anterior...")
+        self.cursor.execute("DELETE FROM productos")
+        # Resetear el auto-incremento
+        self.cursor.execute("DELETE FROM sqlite_sequence WHERE name='productos'")
+        self.conn.commit()
+        print("Base de datos limpiada y auto-incremento reseteado")
+
+        # Leer productos desde productos.xlsx con ruta absoluta
+        productos_path = os.path.join(self.current_dir, "productos.xlsx")
         self.products = read_products(productos_path)
         print(f"Productos cargados: {len(self.products)}")
 
-    def search_product(self, product_name):
+    def search_product1(self, product_name):
         """Abre Amazon y busca un producto."""
         print(f"  Navegando a Amazon...")
         self.driver.get("https://www.amazon.com")
@@ -76,6 +108,48 @@ class AmazonRobot:
         
         # Seleccionar "Destacados" después de la búsqueda
         self.select_destacados()
+
+    def search_product(self, product_name):
+        """Abre Amazon y busca un producto."""
+        print(f" Navegando a Amazon")
+        self.driver.get("https://www.amazon.com")
+        time.sleep(5)
+        
+        # Detectar y hacer clic en el botón "Continue shopping" si aparece
+        try:
+            wait = WebDriverWait(self.driver, 10)
+            # Usar el selector correcto para el botón
+            continue_button = wait.until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "button.a-button-text[alt='Continue shopping']"))
+            )
+            print(f"Detectado botón 'Continue shopping', haciendo clic...")
+            continue_button.click()
+            time.sleep(3)
+            print(f" Botón clickeado exitosamente")
+        except:
+            print(f" No se detectó botón de verificación, continuando...")
+        
+        # Ahora buscar el producto
+        print(f"  Buscando: {product_name}")
+        try:
+            wait = WebDriverWait(self.driver, 15)
+            search_box = wait.until(
+                EC.presence_of_element_located((By.ID, "twotabsearchtextbox"))
+            )
+            search_box.clear()
+            search_box.send_keys(product_name)
+            search_box.send_keys(Keys.RETURN)
+            time.sleep(3)
+            
+            # Seleccionar "Destacados" después de la búsqueda
+            self.select_destacados()
+        except Exception as e:
+            print(f" [ERROR] No se encontró la caja de búsqueda: {e}")
+            # Guardar screenshot en caso de error
+            error_screenshot = os.path.join(self.current_dir, "data", f"error_{product_name}.png")
+            self.driver.save_screenshot(error_screenshot)
+            
+            raise
 
     def select_destacados(self):
         """
@@ -163,32 +237,68 @@ class AmazonRobot:
             
             # Extraer precio
             try:
-                price_whole = product.find_element(By.CSS_SELECTOR, "span.a-price-whole").text
-                price = f"${price_whole}"
+                # Extraer el precio completo como aparece en Amazon
+                price_element = product.find_element(By.CSS_SELECTOR, "span.a-price span.a-offscreen")
+                price = price_element.get_attribute("textContent").strip()
             except:
-                price = "$0"
+                try:
+                    # Método alternativo
+                    price_whole = product.find_element(By.CSS_SELECTOR, "span.a-price-whole").text
+                    price_fraction = product.find_element(By.CSS_SELECTOR, "span.a-price-fraction").text
+                    price = f"${price_whole}{price_fraction}"
+                except:
+                    price = "$0"
             
             # Extraer entrega
             try:
-                entrega = product.find_element(By.CSS_SELECTOR, "div.a-row.a-color-base").text
+                #entrega = product.find_element(By.CSS_SELECTOR, "div.a-row.a-color-base").text
+                #entrega = product.find_element(By.CSS_SELECTOR, "div.a-row.a-size-base.a-color-secondary span[aria-label*='Entrega']").get_attribute("aria-label")
+                # Extraer entrega funcion mas robusta para traer la info sobre la entrega
+                try:
+                    # Intento 1: Buscar por aria-label
+                    entrega_element = product.find_element(By.CSS_SELECTOR, "span[aria-label*='Entrega']")
+                    entrega = entrega_element.get_attribute("aria-label").strip()
+                except:
+                    try:
+                        # Intento 2: Buscar por clase específica
+                        entrega_element = product.find_element(By.CSS_SELECTOR, "div.a-row.a-size-base.a-color-secondary")
+                        entrega = entrega_element.text.strip()
+                    except:
+                        try:
+                            # Intento 3: Buscar cualquier div con texto de entrega
+                            entrega_element = product.find_element(By.XPATH, ".//div[contains(text(), 'Entrega')]")
+                            entrega = entrega_element.text.strip()
+                        except:
+                            entrega = "Sin información de entrega"
+
+
+
+
             except:
                 entrega = "Sin información"
 
+            precio_cop = convertir_a_cop(price)
+            
             data = {
                 "categoria": product_name,
                 "nombre": title,
                 "precio_usd": price,
-                "precio_cop": convertir_a_cop(price),
+                "precio_cop": precio_cop,
                 "entrega": entrega
             }
             product_info.append(data)
-            print(f"    [OK] {idx}: {title[:40]}... - {price}")
+            print(f"    [OK] {idx}: {title[:40]}... - {price} (COP: ${precio_cop:,.0f})")
 
         print(f"  Total extraídos: {len(product_info)}")
         return product_info
 
     def save_to_db(self, product_info):
         """Guarda los productos en la base de datos."""
+        print(f"  Guardando {len(product_info)} productos en la BD...")
+        
+        guardados = 0
+        errores = 0
+        
         for product in product_info:
             try:
                 self.cursor.execute("""
@@ -201,10 +311,14 @@ class AmazonRobot:
                     product['precio_cop'],
                     product['entrega']
                 ))
+                guardados += 1
             except Exception as e:
+                errores += 1
                 log_message(f"Error guardando producto: {e}")
+                print(f"    [ERROR] No se pudo guardar: {product['nombre'][:30]}...")
         
         self.conn.commit()
+        print(f"Guardados: {guardados} | Errores: {errores}")
 
     def create_summary(self):
         """Genera un resumen de los productos más baratos por categoría."""
@@ -256,9 +370,19 @@ class AmazonRobot:
                 continue
 
         self.create_summary()
+
+        # Enviar correo con resumen
+        enviar_correo_resumen(
+            self.conn,
+            "jesuslayton92@gmail.com",  
+            "jesuslayton92@gmail.com",       
+            "eyvk sfry milk gsim"       
+        )
         print("\n" + "="*60)
         print("PROCESO COMPLETADO")
         print("="*60)
+
+    
 
     def close(self):
         """Cierra el navegador y la base de datos."""

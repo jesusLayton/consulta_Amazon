@@ -10,6 +10,7 @@ services:
       - ./api:/app/api
       - ./web:/app/web
       - ./robot/data:/app/robot/data
+      - ./productos_amazon.db:/app/productos_amazon.db
     environment:
       - DISPLAY=:99
     command: uvicorn api.app:app --host 0.0.0.0 --port 8000
@@ -27,6 +28,7 @@ services:
       - ./api:/app/api
       - ./web:/app/web
       - ./robot/data:/app/robot/data
+      - ./productos_amazon.db:/app/productos_amazon.db
     environment:
       - DISPLAY=:99
     command: python web/app.py
@@ -34,8 +36,8 @@ services:
       - amazon-api
     network_mode: bridge  
     dns:                
-      - 8.8.8.8
       - 8.8.4.4
+      - 8.8.8.8
 
 volumes:
   db-data:

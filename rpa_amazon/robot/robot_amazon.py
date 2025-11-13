@@ -12,18 +12,47 @@ import sqlite3
 import sys
 import os
 import argparse
-
+from datetime import datetime
 
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
 load_dotenv()
 
-# Asegurar que Python encuentre el módulo tools
 sys.path.append(os.path.dirname(__file__))
 
 from tools import enviar_correo_resumen, read_products, log_message, convertir_a_cop
 from db import conectar_db
+
+# Redirigir prints a log con timestamp
+class Logger:
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "a", encoding="utf-8", buffering=1)
+        self.new_line = True  
+
+    def write(self, message):
+        self.terminal.write(message)
+        
+        # Si es una nueva línea y no está vacía, agregar timestamp
+        if self.new_line and message.strip():
+            timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S] ")
+            self.log.write(timestamp)
+            self.new_line = False
+        
+        self.log.write(message)
+        
+        # Si termina en salto de línea, la próxima será nueva línea
+        if message.endswith('\n'):
+            self.new_line = True
+        
+        self.log.flush()
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
+sys.stdout = Logger("log.txt")
 
 
 class AmazonRobot:
@@ -168,9 +197,9 @@ class AmazonRobot:
             
             # Posibles selectores para el dropdown de ordenamiento
             selectores = [
-                "span.a-button-text.a-declarative",  # Selector común
-                "span[class*='a-dropdown-prompt']",   # Alternativo
-                "#s-result-sort-select",              # ID directo del select
+                "span.a-button-text.a-declarative", 
+                "span[class*='a-dropdown-prompt']",  
+                "#s-result-sort-select",           
             ]
             
             dropdown = None

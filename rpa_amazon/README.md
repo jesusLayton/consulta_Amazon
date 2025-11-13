@@ -24,7 +24,7 @@ Sistema automatizado para consultar y comparar productos en Amazon, con API REST
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/rpa_amazon.git
+git clone https://github.com/jesusLayton/rpa_amazon.git
 cd rpa_amazon
 ```
 
@@ -38,7 +38,7 @@ EMAIL_DESTINATARIO=destinatario@gmail.com
 EMAIL_PASSWORD=contraseña_aplicacion_google
 
 # Finanzas
-TRM_COP=4200
+TRM_COP=TRM DEL DIA
 
 # Amazon
 AMAZON_URL=https://www.amazon.com
@@ -199,8 +199,5 @@ MIT
 
 ## Autor
 
-[Tu Nombre]
+JESUS LAITON
 
-## Contacto
-
-Para dudas o sugerencias: tu_correo@ejemplo.com

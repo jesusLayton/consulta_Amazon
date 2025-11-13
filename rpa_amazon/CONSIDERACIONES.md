@@ -30,7 +30,7 @@ Requiere "contraseña de aplicación" de Google (no la contraseña normal). Gene
 
 ## Seguridad y Autenticación
 
-⚠️ **La web y API no tienen login ni autenticación por limitaciones de tiempo.**
+**La web y API no tienen login ni autenticación por limitaciones de tiempo.**
 
 **Mejoras futuras recomendadas**:
 - Implementar autenticación (JWT o sesiones)

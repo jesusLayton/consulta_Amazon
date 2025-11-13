@@ -37,4 +37,8 @@ COPY . /app/
 
 RUN mkdir -p /app/robot/data
 
+# Verificar instalaciones
+RUN which chromedriver && chromedriver --version
+RUN which google-chrome && google-chrome --version
+
 CMD ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"]

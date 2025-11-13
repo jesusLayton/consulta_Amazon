@@ -5,6 +5,7 @@
 
 # Archivos Excel generados
 resumen_productos.xlsx
+rpa_amazon_images.tar
 
 # Logs
 *.log

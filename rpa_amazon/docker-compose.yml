@@ -13,8 +13,8 @@ services:
     environment:
       - DISPLAY=:99
     command: uvicorn api.app:app --host 0.0.0.0 --port 8000
-    network_mode: bridge  # ← AGREGAR
-    dns:                  # ← AGREGAR
+    network_mode: bridge  
+    dns:                 
       - 8.8.8.8
       - 8.8.4.4
 
@@ -32,8 +32,8 @@ services:
     command: python web/app.py
     depends_on:
       - amazon-api
-    network_mode: bridge  # ← AGREGAR
-    dns:                  # ← AGREGAR
+    network_mode: bridge  
+    dns:                
       - 8.8.8.8
       - 8.8.4.4
 

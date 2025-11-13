@@ -52,28 +52,38 @@ class AmazonRobot:
           #  options=options
     #)
         
-        # Usar ChromeDriver instalado en el sistema
-        chromedriver_path = "/usr/local/bin/chromedriver"
-        self.driver = webdriver.Chrome(
-            service=Service(chromedriver_path), 
-            options=options
-        )
+        # Detectar si estamos en Docker o local
+        if os.path.exists("/usr/local/bin/chromedriver"):
+            # Estamos en Docker, usar ChromeDriver pre-instalado
+            chromedriver_path = "/usr/local/bin/chromedriver"
+            self.driver = webdriver.Chrome(
+                service=Service(chromedriver_path), 
+                options=options
+            )
+        else:
+            # Estamos en local, descargar con ChromeDriverManager
+            self.driver = webdriver.Chrome(
+                service=Service(ChromeDriverManager().install()), 
+                options=options
+            )
         # Conectar a la base de datos SqLite en la raz del proyecto
         db_path = os.path.join(os.path.dirname(self.current_dir), "productos_amazon.db")
         self.conn, self.cursor = conectar_db(db_path)
 
-        # Limpiar la base de datos antes de empecar
+        # Limpiar la base de datos antes de empezar
         print("Limpiando base de datos anterior...")
         self.cursor.execute("DELETE FROM productos")
+        # Resetear el auto-incremento
+        self.cursor.execute("DELETE FROM sqlite_sequence WHERE name='productos'")
         self.conn.commit()
-        print("Base de datos limpiada")
+        print("Base de datos limpiada y auto-incremento reseteado")
 
         # Leer productos desde productos.xlsx con ruta absoluta
         productos_path = os.path.join(self.current_dir, "productos.xlsx")
         self.products = read_products(productos_path)
         print(f"Productos cargados: {len(self.products)}")
 
-    def search_product(self, product_name):
+    def search_product1(self, product_name):
         """Abre Amazon y busca un producto."""
         print(f"  Navegando a Amazon...")
         self.driver.get("https://www.amazon.com")
@@ -88,6 +98,48 @@ class AmazonRobot:
         
         # Seleccionar "Destacados" después de la búsqueda
         self.select_destacados()
+
+    def search_product(self, product_name):
+        """Abre Amazon y busca un producto."""
+        print(f"  Navegando a Amazon...")
+        self.driver.get("https://www.amazon.com")
+        time.sleep(5)
+        
+        # Detectar y hacer clic en el botón "Continue shopping" si aparece
+        try:
+            wait = WebDriverWait(self.driver, 10)
+            # Usar el selector correcto para el botón
+            continue_button = wait.until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "button.a-button-text[alt='Continue shopping']"))
+            )
+            print(f"Detectado botón 'Continue shopping', haciendo clic...")
+            continue_button.click()
+            time.sleep(3)
+            print(f" Botón clickeado exitosamente")
+        except:
+            print(f" No se detectó botón de verificación, continuando...")
+        
+        # Ahora buscar el producto
+        print(f"  Buscando: {product_name}")
+        try:
+            wait = WebDriverWait(self.driver, 15)
+            search_box = wait.until(
+                EC.presence_of_element_located((By.ID, "twotabsearchtextbox"))
+            )
+            search_box.clear()
+            search_box.send_keys(product_name)
+            search_box.send_keys(Keys.RETURN)
+            time.sleep(3)
+            
+            # Seleccionar "Destacados" después de la búsqueda
+            self.select_destacados()
+        except Exception as e:
+            print(f"  [ERROR] No se encontró la caja de búsqueda: {e}")
+            # Guardar screenshot en caso de error
+            error_screenshot = os.path.join(self.current_dir, "data", f"error_{product_name}.png")
+            self.driver.save_screenshot(error_screenshot)
+            
+            raise
 
     def select_destacados(self):
         """

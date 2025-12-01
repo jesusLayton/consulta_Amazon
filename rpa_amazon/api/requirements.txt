@@ -4,3 +4,4 @@ flask-cors
 pandas
 fastapi
 uvicorn[standard]
+werkzeug>=3.1.4 # not directly required, pinned by Snyk to avoid a vulnerability
